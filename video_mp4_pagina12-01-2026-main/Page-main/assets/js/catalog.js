@@ -244,33 +244,45 @@ class CatalogPage {
         }
     }
 
-    showProductModal(product) {
-        // Create modal HTML
-        const modalHTML = `
-            <div class="product-modal-overlay">
-                <div class="product-modal">
-                    <button class="modal-close">&times;</button>
-                    <div class="modal-content">
-                        <div class="modal-image">
-                            <img src="${product.image}" alt="${product.name}">
-                        </div>
-                        <div class="modal-details">
-                            <h2>${product.name}</h2>
-                            <p class="modal-price">${product.price.toFixed(2)} €</p>
-                            <p class="modal-description">${product.description}</p>
-                            <div class="modal-actions">
-                                <button class="btn btn--primary add-to-cart-modal" data-id="${product.id}">
-                                    Añadir al Carrito
-                                </button>
-                                <button class="btn btn--secondary close-modal">
-                                    Seguir Viendo
-                                </button>
+   // Añadir a CatalogPage en assets/js/catalog.js
+showProductModal(product) {
+    // Extraer tallas del objeto (asumiendo que vienen de la DB)
+    const sizes = product.sizes ? JSON.parse(product.sizes) : ['S', 'M', 'L', 'XL'];
+    
+    const modalHTML = `
+        <div class="product-modal-overlay">
+            <div class="product-modal">
+                <button class="modal-close">&times;</button>
+                <div class="modal-content">
+                    <div class="modal-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="modal-details">
+                        <h2>${product.name}</h2>
+                        <p class="modal-price">${product.price.toFixed(2)} €</p>
+                        
+                        <div class="size-selector">
+                            <span>SELECCIONAR TALLA:</span>
+                            <div class="size-options">
+                                ${sizes.map(size => `<button class="size-btn">${size}</button>`).join('')}
                             </div>
+                            <a href="#" class="size-guide-link"><i class="fas fa-ruler"></i> Guía de tallas</a>
+                        </div>
+
+                        <p class="modal-description">${product.description}</p>
+                        <div class="modal-actions">
+                            <button class="btn btn--primary add-to-cart-modal" data-id="${product.id}">
+                                AÑADIR AL CARRITO
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        `;
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    this.setupModalEvents(product.id);
+}
 
         // Add modal to page
         document.body.insertAdjacentHTML('beforeend', modalHTML);
