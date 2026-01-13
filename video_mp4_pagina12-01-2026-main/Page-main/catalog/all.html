@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOURNE - Catálogo</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="catalog-page">
+
+    <header class="main-header solid-header">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">VOURNE</a>
+            <nav class="nav-links">
+                <a href="all.html" class="active">CATÁLOGO</a>
+                <a href="#">DROPS</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="cart-toggle-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-catalog">
+        <div class="catalog-title">
+            <h1>FULL COLLECTION</h1>
+            <p>2026 DROPS</p>
+        </div>
+
+        <div class="filters">
+            <select id="category-filter" onchange="filterProducts(this.value)">
+                <option value="all">TODO</option>
+                <option value="men">HOMBRE</option>
+                <option value="women">MUJER</option>
+                <option value="accessories">ACCESORIOS</option>
+            </select>
+        </div>
+
+        <div id="product-grid" class="product-grid">
+            <p>Cargando productos...</p>
+        </div>
+    </main>
+
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>CARRITO</h3>
+            <button onclick="toggleCart()" class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total-row"><span>TOTAL:</span><span class="cart-total-price">0.00 €</span></div>
+            <a href="../checkout.html" class="btn btn-black btn-full">PAGAR</a>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Producto añadido</div>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
